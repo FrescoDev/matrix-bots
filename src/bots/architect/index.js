@@ -22,9 +22,7 @@ architectBotInstance.on('message', data => {
             const { channel, user } = data
 
             const ambiguousMsg = formatMsg(data.text)
-            console.log(ambiguousMsg)
             const messageContext = disambiguateMsgContext(ambiguousMsg)
-            console.log(messageContext)
 
             switch (messageContext) {
                 case messageContexts.greeting:

@@ -1,4 +1,5 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+require('events').EventEmitter.defaultMaxListeners = 20
 
 require('babel-core/register');
 require('babel-polyfill');
@@ -18,6 +19,6 @@ if (cluster.isMaster && process.env.NODE_ENV !== 'development') {
         console.log(`worker ${worker.process.pid} died`);
     });
 } else {
-    process.env.NODE_ENV === 'development' ? module.exports = require('./src/bots') : module.exports = require('./build/bots');
+    process.env.NODE_ENV === 'development' ? module.exports = require('./src') : module.exports = require('./build');
     console.log(`Worker ${process.pid} started`);
 }

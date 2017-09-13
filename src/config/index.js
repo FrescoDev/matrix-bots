@@ -18,6 +18,10 @@ const defaultConfig = {
     port: process.env.PORT || 4567,
     ip: process.env.IP || '0.0.0.0',
 
+    logging: {
+        level: 'info'
+    },
+
     slackRTM: {
         architectBot: {
             token: process.env.ARCHITECT_BOT_TOKEN || ''

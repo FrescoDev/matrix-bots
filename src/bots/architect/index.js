@@ -12,18 +12,18 @@ const architectBotInstance = new SlackAPI({
     'autoReconnect': true
 })
 
-architectBotInstance.on('message', data => {
-    const noText = !data.text
-    const { architect } = botIds
-
+architectBotInstance.on('message', message => {
+    const noText = !message.text
     if (noText) return
-
-    const msgIsIntendedForArchitect = data.text.includes(architect.name) || data.text.includes(architect.tagId)
+    
+    const { architect } = botIds
+    const msgIsIntendedForArchitect = message.text.includes(architect.name) || message.text.includes(architect.tagId)
+    
     try {
         if (msgIsIntendedForArchitect) {
-            const { channel, user } = data
+            const { channel, user } = message
 
-            const ambiguousMsg = formatMsg(data.text)
+            const ambiguousMsg = formatMsg(message.text)
             const messageContext = disambiguateMsgContext(ambiguousMsg)
 
             switch (messageContext) {

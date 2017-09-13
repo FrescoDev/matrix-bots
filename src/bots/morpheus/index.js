@@ -10,18 +10,18 @@ const morpheusBotInstance = new SlackAPI({
     'autoReconnect': true
 })
 
-morpheusBotInstance.on('message', data => {
-    const noText = !data.text
-    const { morpheus } = botIds
-
+morpheusBotInstance.on('message', message => {
+    const noText = !message.text
     if (noText) return
 
-    const msgIsIntendedForMorpheus = data.text.includes(morpheus.name) || data.text.includes(morpheus.tagId)
+    const { morpheus } = botIds
+    const msgIsIntendedForMorpheus = message.text.includes(morpheus.name) || message.text.includes(morpheus.tagId)
+    
     try {
         if (msgIsIntendedForMorpheus) {
-            const { channel, user } = data
+            const { channel, user } = message
 
-            const ambiguousMsg = formatMsg(data.text)
+            const ambiguousMsg = formatMsg(message.text)
             const messageContext = disambiguateMsgContext(ambiguousMsg)
 
             switch (messageContext) {

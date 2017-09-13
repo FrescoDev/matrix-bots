@@ -15,10 +15,10 @@ oracleBotInstance.on('message', message => {
     if (noText) return
     
     const { oracle } = botIds
-    const msgIsIntendedFororacle = message.text.includes(oracle.name) || message.text.includes(oracle.tagId)
+    const msgIsIntendedForOracle = message.text.includes(oracle.name) || message.text.includes(oracle.tagId)
     
     try {
-        if (msgIsIntendedFororacle) {
+        if (msgIsIntendedForOracle) {
             const { channel, user } = message
 
             const ambiguousMsg = formatMsg(message.text)

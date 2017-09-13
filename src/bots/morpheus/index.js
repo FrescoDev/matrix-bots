@@ -1,5 +1,5 @@
 import { formatMsg, disambiguateMsgContext } from '../utils'
-import { messageContexts } from '../constants'
+import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
@@ -12,11 +12,13 @@ const morpheusBotInstance = new SlackAPI({
 
 morpheusBotInstance.on('message', data => {
     const noText = !data.text
+    const { morpheus } = botIds
 
     if (noText) return
 
+    const msgIsIntendedForMorpheus = data.text.includes(morpheus.name) || data.text.includes(morpheus.tagId)
     try {
-        if (data.text.includes('morpheus') || data.text.includes('<@U72CFRNQK>')) {
+        if (msgIsIntendedForMorpheus) {
             const { channel, user } = data
 
             const ambiguousMsg = formatMsg(data.text)

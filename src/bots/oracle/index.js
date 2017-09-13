@@ -1,25 +1,27 @@
 import { formatMsg, disambiguateMsgContext } from '../utils'
-import { messageContexts } from '../constants'
+import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
 
-const architectBotInstance = new SlackAPI({
+const oracleBotInstance = new SlackAPI({
     'token': config.slackRTM.oracleBot.token,
     'logging': true,
     'autoReconnect': true
 })
 
-architectBotInstance.on('message', data => {
-    const noText = !data.text
-
+oracleBotInstance.on('message', message => {
+    const noText = !message.text
     if (noText) return
-
+    
+    const { oracle } = botIds
+    const msgIsIntendedFororacle = message.text.includes(oracle.name) || message.text.includes(oracle.tagId)
+    
     try {
-        if (data.text.includes('oracle') || data.text.includes('<@U73GZDN2K>')) {
-            const { channel, user } = data
+        if (msgIsIntendedFororacle) {
+            const { channel, user } = message
 
-            const ambiguousMsg = formatMsg(data.text)
+            const ambiguousMsg = formatMsg(message.text)
             const messageContext = disambiguateMsgContext(ambiguousMsg)
 
             switch (messageContext) {
@@ -35,4 +37,4 @@ architectBotInstance.on('message', data => {
     }
 })
 
-export default architectBotInstance
+export default oracleBotInstance

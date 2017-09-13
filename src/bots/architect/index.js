@@ -1,5 +1,5 @@
 import { formatMsg, disambiguateMsgContext } from '../utils'
-import { messageContexts } from '../constants'
+import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
 import handleCapabilityQuery from './handleCapabilityQuery'
 import SlackAPI from 'slackbotapi'
@@ -14,11 +14,13 @@ const architectBotInstance = new SlackAPI({
 
 architectBotInstance.on('message', data => {
     const noText = !data.text
+    const { architect } = botIds
 
     if (noText) return
 
+    const msgIsIntendedForArchitect = data.text.includes(architect.name) || data.text.includes(architect.tagId)
     try {
-        if (data.text.includes('architect') || data.text.includes('<@U71BZQCBA>')) {
+        if (msgIsIntendedForArchitect) {
             const { channel, user } = data
 
             const ambiguousMsg = formatMsg(data.text)

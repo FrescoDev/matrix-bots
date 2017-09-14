@@ -4,9 +4,10 @@ import { botIds } from '../constants'
 const handleCapabilityQuery = ({ channel, user }) => {
     botInstance.sendMsg(
         channel,
-    `<@${user}> You've been living in a dream world, Neo.
+        `<@${user}> You've been living in a dream world, Neo.
         
-    Think of me as a sort of F.A.Q. with a conversational UI, I can demonstrate how common processes like "deployment" work, and provide some on boarding assistance for newcomers to the matrix.
+    Think of me as a sort of F.A.Q. with a conversational UI, I can demonstrate how common processes like "deployment" work,
+     and provide some on boarding assistance for newcomers to the matrix.
         
     Once you're ready I will show you how to build and black box test a component.
     `)
@@ -15,32 +16,20 @@ const handleCapabilityQuery = ({ channel, user }) => {
 
         botInstance.sendMsg(
             channel,
-    `I respond to the following commands:
+            `I respond to the following commands:
 
-    \`Explain\`: 
+    \`Explain\`: *Search for a doc snippet via keyword.*
 
-    *Initialise a new system base.*
+    \`New kit\`: *Download the neo developer tool kit (CLIs, node, npm packages, etc).*
 
-    Your system infrastructure in the form of :
+    \`Demonstrate\`: *Search for a process walkthrough.*
 
-
-    \`Demonstrate\`:
-    
-    *Create a system worker component.*
-
-    These can be thought of as server side functionalities for specific client or internally defined contexts 
-    a.k.a Sentinels.
+    \`Test component\`: *Kick a start a component test.*
 
 
-    \`Test component\`:
-
-    *Create a system visual interface rendering component.*
-
-    Web applications containing visual logic a.k.a. a Matrix-Face.
-
-
-    ${botIds.architect.tagId} will allow you to create, and edit the matrix. Think of him as a sort component factory. 
-    ${botIds.oracle.tagId} knows all, she can provide you with insight relating to the matrix and its components. (Lets you query cocumentation, monitoring and health metrics data relating to your applications and their servers). 
+    ${botIds.architect.tagId} will allow you to create, and edit the matrix system and its inner components.
+    ${botIds.oracle.tagId} knows all, she can provide you with insight relating to the matrix and its components. 
+    (Lets you query documentation, monitoring and health metrics data relating to your applications and their servers). 
     `)
     }, 5000)
 

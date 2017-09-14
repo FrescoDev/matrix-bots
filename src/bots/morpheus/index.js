@@ -1,6 +1,7 @@
 import { formatMsg, disambiguateMsgContext } from '../utils'
 import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
+import handleCapabilityQuery from './handleCapabilityQuery'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
 
@@ -27,6 +28,8 @@ morpheusBotInstance.on('message', message => {
             switch (messageContext) {
                 case messageContexts.greeting:
                     return handleGreetingMsg({ channel, user })
+                case messageContexts.capabilityQuery:
+                    return handleCapabilityQuery({ channel, user })
 
                 default:
                     return

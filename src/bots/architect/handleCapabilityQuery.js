@@ -1,4 +1,5 @@
 import botInstance from './index'
+import { botIds } from '../constants'
 
 const handleCapabilityQuery = ({ channel, user }) => {
     botInstance.sendMsg(
@@ -56,8 +57,8 @@ const handleCapabilityQuery = ({ channel, user }) => {
     *Create a cross component user journey test application.*
 
 
-    <@U72CFRNQK> can show you how to use the matrix, he can also help you launch a component integration test, speak to him for further detail. 
-    <@U73GZDN2K> knows all, she can provide you with insight relating to the matrix and its components. (Lets you query cocumentation, monitoring and health metrics data relating to your applications and their servers). 
+    ${botIds.morpheus.tagId} can show you how to use the matrix, he can also help you launch a component integration test, speak to him for further detail. 
+    ${botIds.oracle.tagId} knows all, she can provide you with insight relating to the matrix and its components. (Lets you query cocumentation, monitoring and health metrics data relating to your applications and their servers). 
     `)
     }, 2000)
 

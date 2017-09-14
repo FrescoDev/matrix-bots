@@ -1,6 +1,7 @@
 import { formatMsg, disambiguateMsgContext } from '../utils'
 import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
+import handleCapabilityQuery from './handleCapabilityQuery'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
 
@@ -13,10 +14,10 @@ const oracleBotInstance = new SlackAPI({
 oracleBotInstance.on('message', message => {
     const noText = !message.text
     if (noText) return
-    
+
     const { oracle } = botIds
     const msgIsIntendedForOracle = message.text.includes(oracle.name) || message.text.includes(oracle.tagId)
-    
+
     try {
         if (msgIsIntendedForOracle) {
             const { channel, user } = message
@@ -27,6 +28,9 @@ oracleBotInstance.on('message', message => {
             switch (messageContext) {
                 case messageContexts.greeting:
                     return handleGreetingMsg({ channel, user })
+                case messageContexts.capabilityQuery:
+                    return handleCapabilityQuery({ channel, user })
+
 
                 default:
                     return

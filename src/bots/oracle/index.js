@@ -2,6 +2,7 @@ import { formatMsg, disambiguateMsgContext } from '../utils'
 import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
 import handleCapabilityQuery from './handleCapabilityQuery'
+import handleIdentityQuery from './handleIdentityQuery'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
 
@@ -30,7 +31,8 @@ oracleBotInstance.on('message', message => {
                     return handleGreetingMsg({ channel, user })
                 case messageContexts.capabilityQuery:
                     return handleCapabilityQuery({ channel, user })
-
+                case messageContexts.identityQuery:
+                    return handleIdentityQuery({ channel, user })
 
                 default:
                     return

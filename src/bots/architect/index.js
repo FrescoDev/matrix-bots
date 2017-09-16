@@ -2,6 +2,7 @@ import { formatMsg, disambiguateMsgContext } from '../utils'
 import { messageContexts, botIds } from '../constants'
 import handleGreetingMsg from './handleGreetingMsg'
 import handleCapabilityQuery from './handleCapabilityQuery'
+import handleIdentityQuery from './handleIdentityQuery'
 import SlackAPI from 'slackbotapi'
 import config from '../../config'
 
@@ -15,10 +16,10 @@ const architectBotInstance = new SlackAPI({
 architectBotInstance.on('message', message => {
     const noText = !message.text
     if (noText) return
-    
+
     const { architect } = botIds
     const msgIsIntendedForArchitect = message.text.includes(architect.name) || message.text.includes(architect.tagId)
-    
+
     try {
         if (msgIsIntendedForArchitect) {
             const { channel, user } = message
@@ -31,6 +32,8 @@ architectBotInstance.on('message', message => {
                     return handleGreetingMsg({ channel, user })
                 case messageContexts.capabilityQuery:
                     return handleCapabilityQuery({ channel, user })
+                case messageContexts.identityQuery:
+                    return handleIdentityQuery({ channel, user })
 
                 default:
                     return

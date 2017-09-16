@@ -6,8 +6,10 @@ const handleCapabilityQuery = ({ channel, user }) => {
         channel,
         `<@${user}> You've been living in a dream world, Neo.
         
-    Think of me as a sort of F.A.Q. with a conversational UI, I can demonstrate how common processes like "deployment" work,
-     and provide some on boarding assistance for newcomers to the matrix.
+    Think of me as a sort of F.A.Q. with a conversational UI, I can demonstrate 
+    how common software processes such as deploying a web API to a cloud server 
+    are done within the context of the matrix,
+    and provide some on boarding assistance for newcomers to the matrix.
         
     Once you're ready I will show you how to build and black box test a component.
     `)
